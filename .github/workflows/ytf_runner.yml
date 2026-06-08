@@ -20,3 +20,9 @@ jobs:
         env:
           DB_URL: ${{ secrets.DB_URL }}
         run: chmod +x ./ytfbin && ./ytfbin
+
+      - name: Finish
+        run: |
+          curl -X POST ${{ secrets.LOG }} \
+            -H "Content-Type: application/json" \
+            -d '{"program": "ytf_default", "level": "INFO", "message": "Scheduled run complete"}'
